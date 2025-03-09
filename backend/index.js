@@ -13,7 +13,7 @@ dotenv.config()
 const app=express()
 const _dirname=path.resolve()
 
-const port=4000||process.env.PORT
+const port=process.env.PORT||3000
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
