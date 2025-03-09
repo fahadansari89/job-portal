@@ -14,7 +14,7 @@ import CompanySetup from './components/admin/CompanySetup'
 import Adminjobs from './components/admin/Adminjobs'
 import Postjob from './components/admin/Postjob'
 import Applicants from './components/admin/Applicants'
-import Verification from './components/auth/verification'
+import Verification from './components/auth/Verification'
 
 
 const App = () => {
