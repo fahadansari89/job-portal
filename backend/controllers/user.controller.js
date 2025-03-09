@@ -7,18 +7,26 @@ import cloudinary from "../utils/cloudinary.js";
 
 export const register = async (req, res) => {
   try {
-    const { fullName, email,phoneNumber, password, role, file } = req.body;
-    console.log(fullName, email, phoneNumber, password, role);
+    const { fullName, email,phoneNumber, password, role } = req.body;
     
-    if (!fullName || !email || !password || !role || !phoneNumber ||!file) {
+    
+    if (!fullName || !email || !password || !role || !phoneNumber ) {
       return res.status(400).json({
         message: "all field are required",
         success: false,
       });
     }
-     file=req.file
+    
+     const file=req.file
+     if (!file) {
+      return res.status(400).json({
+        message:"please upload a profile photo",
+        success:false
+      })
+    }
     const fileUri=getDataUri(file)
     const cloudResponse= await cloudinary.uploader.upload(fileUri.content)
+    
     const user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({
@@ -28,6 +36,7 @@ export const register = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const verificationCode=Math.floor(Math.random()*100000).toString()
+     await sendVerificationCode(email,verificationCode)
     await User.create({
       fullName,
       email,
@@ -36,10 +45,10 @@ export const register = async (req, res) => {
       password: hashedPassword,
       role,
       profile:{
+        
         profilePhoto:cloudResponse.secure_url
       }
     });
-    sendVerificationCode(email,verificationCode)
     return res.status(200).json({
       message: "email send  successfully",
       success: true,
@@ -120,7 +129,7 @@ export const logout=async(req,res)=>{
 export const updateProfile=async(req,res)=>{
     try {
       const { fullName, email,phoneNumber,bio, skills } = req.body; 
-      console.log(fullName);
+    
       
       const file=req.file
       const fileUri=getDataUri(file)
