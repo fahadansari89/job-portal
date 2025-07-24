@@ -29,7 +29,7 @@ const initialValues={
    role:'',
   
 }
-const Signup = () => {
+const Login = () => {
     const {loading}=useSelector(store=>store.auth)
     
     const navigate=useNavigate()
@@ -92,8 +92,8 @@ const Signup = () => {
   return (
     <div>
         <Navbar/>
-        <div className='flex items-center justify-center max-w-6xl mx-auto'>
-            <form onSubmit={handleSubmit}className='w-1/2 border-2 border-gray-200 rounded-md p-4 my-10 shadow-white shadow-md'>
+        <div className='flex items-center justify-center w-full min-h-screen px-4 mx-auto'>
+            <form onSubmit={handleSubmit}className='w-full max-w-sm border-2 border-gray-200 rounded-md p-4 my-10 shadow-white shadow-md'>
                 <h1 className='font-bold text-3xl mb-5 text-center text-indigo-600'>LOGIN</h1>
                
                 <div>
@@ -135,7 +135,7 @@ const Signup = () => {
                 
                  </div>
                 </div>
-                <div className='flex items-center gap-4 space-x-2'>
+                <div className='flex flex-col sm:flex-row sm:items-center gap-4 space-x-2'>
                     <div className='flex items-start gap-2'>
                         <Label htmlFor='student' className='cursor-pointer'>Student</Label>
                         <input
@@ -185,4 +185,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Login

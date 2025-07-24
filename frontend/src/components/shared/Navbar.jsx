@@ -29,13 +29,13 @@ const Navbar = () => {
     }
     const { user } = useSelector(store => store.auth)
     return (
-        <div className='flex justify-between mx-auto max-w-6xl '>
-            <div >
-                <h1 className='text-2xl font-bold mt-3'>Job <span className='text-indigo-600'>looker</span></h1>
+        <div className='w-full flex justify-between shadow-sm border-b '>
+            <div className='flex justify-between items-center mx-auto px-4 w-full py-3'>
+                <h1 className='text-xl font-bold sm:text-2xl mt-3'>Job <span className='text-indigo-600'>looker</span></h1>
             </div>
-            <div className='flex items-center gap-10 align-middle space-y-3'>
+            <div className=' sm:flex items-center gap-8 flex align-middle'>
 
-                <ul className='flex items-center gap-5 font-medium'>
+                <ul className='flex gap-5 font-medium'>
                     {
                         user && user.role === "Recruiter" ? (
                             <>
@@ -57,7 +57,7 @@ const Navbar = () => {
                     !user ? (
                         <div className='flex gap-2'>
                             <Link to='/login'><Button variant='outline' className='text-black bg-indigo-600 border-none'>Login</Button></Link>
-                            <Link to='signup'><Button >Signup</Button></Link>
+                            <Link to='/signup'><Button >Signup</Button></Link>
                         </div>
                     ) : (<Popover>
                         <PopoverTrigger>

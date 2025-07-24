@@ -21,6 +21,7 @@ const signupSchema=Yup.object({
     email:Yup.string().email().required("email is required"),
     phoneNumber:Yup.number().required("phone is required"),
     password:Yup.string().min(6).required("password is required"), 
+    role: Yup.string().required("Role is required")
      
 })
 const initialValues={
@@ -76,7 +77,7 @@ const Signup = () => {
                 withCredentials:true
                 
             }).then((result) => {
-               
+                
                 if (result.data.success) {
                     toast.success(result.data.message)
                     navigate("/verification")
@@ -101,9 +102,9 @@ const Signup = () => {
   return (
     <div>
         <Navbar/>
-        <div className='flex items-center justify-center max-w-6xl mx-auto'>
-            <form onSubmit={handleSubmit}className='w-1/2 border-2 border-gray-200 rounded-md p-4 my-10 shadow-white shadow-md'>
-                <h1 className='font-bold text-3xl mb-5 text-center text-indigo-600'>SIGNUP</h1>
+        <div className='flex items-center justify-center min-h-screen w-full mx-auto p-4'>
+            <form onSubmit={handleSubmit}className='w-full sm:w-[90%] md:w-1/2 border-2 border-gray-200 rounded-md p-4 my-10 shadow-white shadow-md'>
+                <h1 className='font-bold text-2xl sm:text-3xl mb-5 text-center text-indigo-600'>SIGNUP</h1>
                 <div>
 
                  <Label> Full name</Label>
@@ -143,7 +144,7 @@ const Signup = () => {
                  type='number'
                  placeholder='enter your number'
                  name='phoneNumber'
-                 value={values.phone}
+                 value={values.phoneNumber}
                  onChange={handleChange}
                  onBlur={handleBlur}
                  />
@@ -173,7 +174,7 @@ const Signup = () => {
                 
                  </div>
                 </div>
-                <div className='flex items-center gap-4 space-x-2'>
+                <div className='flex flex-col sm:flex-row sm:items-center gap-4 space-x-2'>
                     <div className='flex items-start gap-2'>
                         <Label htmlFor='student' className='cursor-pointer'>Student</Label>
                         <input
